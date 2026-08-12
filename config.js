@@ -14,7 +14,7 @@ export const firebaseConfig = null;
 /*  Slik ser det ut når det er fylt ut:
 
 export const firebaseConfig = {
-  apiKey: "AIzaSyXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+  apiKey: "432977126270",
   authDomain: "bergen-roma.firebaseapp.com",
   projectId: "bergen-roma",
   storageBucket: "bergen-roma.appspot.com",
