@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bergen → Roma</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="topp">
+  <div class="topp-tekst">
+    <p class="eyebrow">Felles løpetur <span class="prikk"></span> <span id="modus-merke" class="modus">Kobler til …</span></p>
+    <h1>Bergen <span class="pil">→</span> Roma</h1>
+    <p class="status" id="status-tekst">Laster inn logg …</p>
+  </div>
+  <div class="teller">
+    <span class="teller-tall" id="teller-km">0</span>
+    <span class="teller-enhet">km løpt av <span id="teller-total">0</span></span>
+  </div>
+</header>
+
+<main>
+  <section class="kart-boks">
+    <div id="kart"></div>
+  </section>
+
+  <!-- Etappelinjal: hele ruta som én strek, med byene der de faktisk ligger -->
+  <section class="linjal-boks" aria-label="Etappelinjal">
+    <div class="linjal" id="linjal">
+      <div class="linjal-spor"></div>
+      <div class="linjal-fylt" id="linjal-fylt"></div>
+      <div class="linjal-loper" id="linjal-loper" title="Her er laget nå">
+        <span class="loper-figur">🏃</span>
+      </div>
+    </div>
+    <div class="linjal-byer" id="linjal-byer"></div>
+    <p class="neste-by" id="neste-by"></p>
+  </section>
+
+  <div class="kolonner">
+    <section class="panel" aria-labelledby="h-legg-til">
+      <h2 id="h-legg-til">Legg til kilometer</h2>
+      <div class="skjema">
+        <label for="f-navn">Navn</label>
+        <input id="f-navn" type="text" maxlength="40" placeholder="Skriv navnet ditt" autocomplete="name">
+
+        <label for="f-km">Kilometer</label>
+        <input id="f-km" type="number" min="0.1" max="200" step="0.1" placeholder="5,4">
+
+        <label for="f-dato">Dato</label>
+        <input id="f-dato" type="date">
+
+        <label for="f-kommentar">Kommentar <span class="valgfri">valgfritt</span></label>
+        <input id="f-kommentar" type="text" maxlength="80" placeholder="Rundt Store Lungegårdsvann i regn">
+
+        <button id="f-send" class="knapp-primar">Legg til</button>
+        <p class="skjema-melding" id="skjema-melding" role="status"></p>
+      </div>
+    </section>
+
+    <section class="panel" aria-labelledby="h-lag">
+      <h2 id="h-lag">Laget</h2>
+      <ol class="lagliste" id="lagliste"></ol>
+      <h2 class="h2-sekundar" id="h-logg">Siste økter</h2>
+      <ul class="logg" id="logg"></ul>
+      <button id="f-csv" class="knapp-sekundar">Last ned logg som CSV</button>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <p>Ruta følger landeveien Bergen–Voss–Oslo–Göteborg–København–Hamburg–Frankfurt–Basel–Milano–Roma.
+  Kartdata © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>-bidragsytere.</p>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script type="module" src="app.js"></script>
+</body>
+</html>
