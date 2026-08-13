@@ -1,4 +1,4 @@
-{
+const firebaseConfig = {
   apiKey: "AIzaSyB2Rygl2lFTcHXfOrzlLCZX2zlR6XhHPbo",
   authDomain: "bergen-roma.firebaseapp.com",
   projectId: "bergen-roma",
