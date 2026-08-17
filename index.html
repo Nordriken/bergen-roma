@@ -9,6 +9,18 @@
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <link rel="stylesheet" href="styles.css">
+<script>
+/* Skriver skriptfeil rett på siden, så du slipper å åpne utviklerkonsollen.
+   Fanger også syntaksfeil i app.js og config.js, som ellers er helt tause. */
+window.addEventListener('error', function (e) {
+  var s = document.getElementById('status-tekst');
+  if (!s) return;
+  var fil = (e.filename || '').split('/').pop() || 'skript';
+  s.textContent = 'Feil i ' + fil + (e.lineno ? ', linje ' + e.lineno : '') +
+                  ': ' + (e.message || 'ukjent feil');
+  s.style.color = '#A8452C';
+}, true);
+</script>
 </head>
 <body>
 

@@ -1,4 +1,21 @@
-import { firebaseConfig, lagId } from './config.js';
+/* config.js leses slik at en skrivefeil der ikke stopper hele appen.
+   Er filen ødelagt, kjører appen videre med lokal logg og sier fra. */
+let firebaseConfig = null;
+let lagId = 'slaatthaug';
+let konfigFeil = '';
+
+try {
+  const cfg = await import('./config.js');
+  firebaseConfig = cfg.firebaseConfig ?? null;
+  if (cfg.lagId) lagId = cfg.lagId;
+  if (firebaseConfig && !firebaseConfig.projectId){
+    konfigFeil = 'config.js mangler projectId. Appen bruker lokal logg.';
+    firebaseConfig = null;
+  }
+} catch (feil) {
+  konfigFeil = 'config.js kunne ikke leses: ' + (feil.message || feil) +
+               ' — sjekk at det står ett komma mellom linjene og at hele objektet er med.';
+}
 
 /* =====================================================
    1. RUTA
@@ -598,7 +615,9 @@ function visStorFeil(tekst){
 const lager = await lagLager();
 el('modus-merke').textContent = lager.delt ? 'Delt logg' : 'Lokal logg';
 el('modus-merke').classList.toggle('lokal', !lager.delt);
-if (!lager.delt){
+if (konfigFeil){
+  melding(konfigFeil, false);
+} else if (!lager.delt){
   melding('Tallene lagres bare i denne nettleseren. Se README for å slå på delt logg.', true);
 }
 lager.lytt(okter => { sisteOkter = okter; tegn(okter); });
